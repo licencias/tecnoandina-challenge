@@ -1,7 +1,7 @@
 # Challenge
 
 El desafío consiste en desarrollar 3 microservicios(servicio-1, 2 y 3) que cumplan lo requerido en el *README* de cada carpeta.
-Para ello debe confeccionar el Dockerfile correspondiente a cada servicio que puede o no ser el mismo dependiendo como lo haga.
+Para ello debe desarrollar el código de cada servicio y confeccionar el Dockerfile correspondiente a cada servicio que puede o no ser el mismo dependiendo como lo haga.
 
 La forma de entrega es hacer un fork de este repositorio y luego envíar un pull request con la resolución.
 
