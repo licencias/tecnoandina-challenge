@@ -1,23 +1,24 @@
-from urllib import response
-from wsgiref.util import setup_testing_defaults
-from wsgiref.simple_server import make_server
+#Codigo para publicador
+import paho.mqtt.client as mqtt
+import time
+import datetime
+import random
 import json
 
-port = 8001
+def main():
+    while True:
+      datetime_object = str(datetime.datetime.now())
 
-def simple_app(environ, start_response):
-    setup_testing_defaults(environ)
+      response = {
+          "time": datetime_object,
+          "value": round(random.uniform(0, 100), 2),
+          "version": random.randint(1, 2)
+      }
 
-    status = '200 OK'
-    headers = [('Content-type', 'text/plain; charset=utf-8')]
+      client = mqtt.Client()
+      client.connect("127.0.0.1", 1883, 60)
+      client.publish("challenge/dispositivo/rx", json.dumps(response))
 
-    start_response(status, headers)
-    response = {"mensaje":"test"}
+      time.sleep(60)
 
-    ret = [ bytes(json.dumps(response), 'utf-8') ]
-
-    return ret
-
-with make_server('', port, simple_app) as httpd:
-    print("Serving on port {}...".format(port))
-    httpd.serve_forever()
+main()
