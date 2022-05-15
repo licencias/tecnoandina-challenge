@@ -1,2 +1,9 @@
-# Dockerfile con la imagen y pasos para dejar funcionando el servicio
-# puede ser igual al del servicio-2 y servicio-3
+FROM python:3.8
+
+ADD app.py .
+
+RUN pip install paho-mqtt
+
+# CMD [ "python","./app.py" ]
+
+ENTRYPOINT python app.py
