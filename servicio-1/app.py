@@ -5,26 +5,29 @@ import datetime
 import random
 import json
 
+
 def main():
-    while True:
-        try:
+    try:   
+        client = mqtt.Client()
+        client.connect("localhost", 1883, 60)
+               
+        while True:
+
             datetime_object = str(datetime.datetime.now())
 
             response = {
                 "time": datetime_object,
-                "value": round(random.uniform(0, 100), 2),
+                "value": round(random.uniform(0, 1000), 2),
                 "version": random.randint(1, 2)
             }
-
-            client = mqtt.Client()
-            client.connect("127.0.0.1", 3001, 60)
-            client.publish("challenge/dispositivo/rx", json.dumps(response))
+            client.publish("challenge/dispositivo/rx",
+                           json.dumps(response))
 
             print(response)
+            time.sleep(2)
 
-        except Exception as e:
-            print(e)
+    except Exception as e:
+        print(e)
 
-        time.sleep(2)
 
 main()
