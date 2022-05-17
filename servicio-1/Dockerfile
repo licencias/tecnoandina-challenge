@@ -1,4 +1,4 @@
-FROM python:3.8
+FROM python:3.8.4-slim-buster
 
 ADD app.py .
 

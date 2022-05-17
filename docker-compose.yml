@@ -1,19 +1,19 @@
 version: "3"
 
 services:
-  # servicio-1:
-  #   build: ./servicio-1/
-  #   ports:
-  #     - 8081:8080
-  #   depends_on:
-  #     - mosquitto
+  servicio-1:
+    build: ./servicio-1/
+    ports:
+      - 8081:8080
+    depends_on:
+      - mosquitto
 
-  # servicio-2:
-  #   build: ./servicio-2/
-  #   ports:
-  #     - 8082:8080
-  #   depends_on:
-  #     - mosquitto
+  servicio-2:
+    build: ./servicio-2/
+    ports:
+      - 8082:8080
+    depends_on:
+      - mosquitto
 
   # servicio-3:
   #   build: ./servicio-3/

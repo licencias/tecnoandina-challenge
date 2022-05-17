@@ -1,2 +1,10 @@
-# Dockerfile con la imagen y pasos para dejar funcionando el servicio
-# puede ser igual al del servicio-1 y servicio-3
+FROM python:3.8.4-slim-buster
+
+ADD app.py .
+
+COPY ./requirements.txt /requirements.txt
+
+RUN pip install -r requirements.txt
+# CMD [ "python","./app.py" ]
+
+ENTRYPOINT python app.py

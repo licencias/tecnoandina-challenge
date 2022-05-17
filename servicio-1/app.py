@@ -9,7 +9,7 @@ import json
 def main():
     try:   
         client = mqtt.Client()
-        client.connect("localhost", 1883, 60)
+        client.connect("mosquitto", 1883, 60)
                
         while True:
 

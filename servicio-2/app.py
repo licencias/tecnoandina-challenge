@@ -4,9 +4,10 @@ from influxdb import InfluxDBClient
 from datetime import datetime
 import json
 from influxdb_client import InfluxDBClient, Point, WritePrecision
-from influxdb_client.client.write_api import SYNCHRONOUS
+from influxdb import InfluxDBClient
+#from influxdb_client.client.write_api import SYNCHRONOUS
 
-token = "Z3OiLCIbqlNM77hfB5YVZEO8XhAeuIDKl2OlgeYbLR-t48qhFbwHoEmlwB6pp2-F4Tkb-WsZ2Qe7DAzxwW2JpQ=="
+token = "my-token"
 org = "tecnoandina"
 bucket = "system"
 
@@ -18,51 +19,48 @@ bucket = "system"
 
 
 def send_data_influx_db(json_payload):
-    with InfluxDBClient(url="http://localhost:8086", token=token, org=org) as client:
-        write_api = client.write_api(write_options=SYNCHRONOUS)
+    # with InfluxDBClient(url="http://localhost:8086", token=token, org=org) as client:
+    client = InfluxDBClient('influx', '8086', 'admin', 'admin', 'system')
+ 
+    #client.create_database('system')
+    # print("parte2")
+    #client.get_list_database()
+    # print("parte3")
+    #client.switch_database('system')
+    # print("parte4")
+    # #write_api = client.write_api(write_options=SYNCHRONOUS)
 
-        payload = json.loads(json_payload)
+    payload = json.loads(json_payload)
+    # print("parte5")
 
-        # data = {
-        #     "measurement": "dispositivos",
-        #     "tags": {
-        #         "version": payload['version']
-        #     },
-        #     "fields": {
-        #         'time': payload['time'],
-        #         'value': str(payload['value'])
-        #     }
-        # }
+    # point = Point("Test04") \
+    #     .tag("version", payload['version']) \
+    #     .field("time", payload['time']) \
+    #     .field("value", str(payload['value']))
+    
+    # print("parte6")
 
-        point = Point("Test01") \
-            .tag("version", payload['version']) \
-            .field("time", payload['time']) \
-            .field("value",str(payload['value']))
-
-        print("data", point)
-        write_api.write(bucket, org, point)
+    # print("data", point)
+    # write_api.write(bucket, org, point)
 
 def on_connect(client, userdata, flags, rc):
     print("Se conecto con mqtt " + str(rc))
     client.subscribe("challenge/dispositivo/#")
-
+    pass
 
 def on_message(client, userdata, msg):
     if msg.topic == "challenge/dispositivo/rx":
-        print(str(msg.payload))
-
-        #envio mensaje a influx
+        print(msg.payload)
         send_data_influx_db(msg.payload)
-    print(msg.topic + " " + str(msg.payload))
-
-
+    pass
+        
 def main():
     try:
         client = mqtt.Client()
         client.on_connect = on_connect
         client.on_message = on_message
 
-        client.connect("localhost", 1883)
+        client.connect("mosquitto", 1883)
         client.loop_forever()
     except Exception as e:
         print(e)
