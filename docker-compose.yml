@@ -17,13 +17,16 @@ services:
     depends_on:
       - mosquitto
 
-  # servicio-3:
-  #   build: ./servicio-3/
-  #   ports:
-  #     - 8083:8080
-  #   depends_on:
-  #     - influx
-  #     - mysql
+  servicio-3:
+    container_name: servicio-3
+    build: ./servicio-3/
+    ports:
+      - 5000:5000
+    environment:
+      FLASK_ENV: development
+    depends_on:
+      - influx
+      - mysql
 
   mosquitto:
     container_name: mqtt

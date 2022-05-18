@@ -1,0 +1,4 @@
+influxdb
+influxdb_client
+flask
+setuptools
