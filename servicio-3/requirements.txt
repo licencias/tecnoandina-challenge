@@ -2,3 +2,4 @@ influxdb
 influxdb_client
 flask
 setuptools
+mysql-connector-python

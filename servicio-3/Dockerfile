@@ -1,4 +1,16 @@
-FROM python:3.10-alpine
+# FROM python:3.8
+
+# EXPOSE 5000
+
+# WORKDIR /app
+
+# COPY requirements.txt /app
+# RUN pip install -r requirements.txt
+
+# COPY app.py /app
+# CMD python app.py
+
+FROM python:3.8.4-alpine
 
 WORKDIR /code
 
@@ -15,16 +27,3 @@ RUN pip install -r requirements.txt
 COPY . .
 
 CMD [ "flask","run" ]
-
-# FROM python:3.8.4
-
-# ADD app.py .
-
-# COPY ./requirements.txt /requirements.txt
-
-# RUN pip install --upgrade pip
-
-# RUN pip install -r requirements.txt
-# # CMD [ "python","./app.py" ]
-
-# ENTRYPOINT python app.py

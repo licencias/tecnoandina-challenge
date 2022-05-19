@@ -24,7 +24,7 @@ def main():
                            json.dumps(response))
 
             print(response)
-            time.sleep(2)
+            time.sleep(60)
 
     except Exception as e:
         print(e)
