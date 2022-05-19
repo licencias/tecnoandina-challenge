@@ -42,7 +42,6 @@ services:
     container_name: mysql
     image: mysql:8
     volumes:
-      - mysqldata:/var/lib/mysql
       - ./db:/docker-entrypoint-initdb.d/:ro
     ports:
       - 3306:3306

@@ -6,6 +6,4 @@ RUN pip install --upgrade pip
 
 RUN pip install paho-mqtt
 
-# CMD [ "python","./app.py" ]
-
 ENTRYPOINT python app.py

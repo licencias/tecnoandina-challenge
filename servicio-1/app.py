@@ -7,19 +7,14 @@ import json
 
 
 def main():
-    try:   
+    try:
         client = mqtt.Client()
         client.connect("mosquitto", 1883, 60)
-               
+
         while True:
 
-            datetime_object = str(datetime.datetime.now())
+            response = check_device()
 
-            response = {
-                "time": datetime_object,
-                "value": round(random.uniform(0, 1000), 2),
-                "version": random.randint(1, 2)
-            }
             client.publish("challenge/dispositivo/rx",
                            json.dumps(response))
 
@@ -28,6 +23,19 @@ def main():
 
     except Exception as e:
         print(e)
+
+
+def check_device():
+
+    datetime_object = str(datetime.datetime.now())
+
+    response = {
+        "time": datetime_object,
+        "value": round(random.uniform(0, 1000), 2),
+        "version": random.randint(1, 2)
+    }
+
+    return response
 
 
 main()
